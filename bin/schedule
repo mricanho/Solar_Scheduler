@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+# Example CLI entry point for Solar Scheduler
+
+require_relative '../lib/scheduler'
+include SolarScheduler   # facilita acceso a structs y DAYS
+
+# -demo data --------------------------
+employees = [
+  Employee.new('C1', :certified, DAYS),
+  Employee.new('C2', :certified, DAYS),
+  Employee.new('P1', :pending,   DAYS),
+  Employee.new('P2', :pending,   DAYS),
+  Employee.new('L1', :laborer,   DAYS),
+  Employee.new('L2', :laborer,   DAYS),
+  Employee.new('L3', :laborer,   DAYS),
+  Employee.new('L4', :laborer,   DAYS)
+]
+
+buildings = [
+  Building.new('B1', :single),
+  Building.new('B2', :two_story),
+  Building.new('B3', :commercial),
+  Building.new('B4', :single)
+]
+# --------------------------------------
+
+plan = SolarScheduler.schedule(buildings, employees)
+
+require 'json'
+puts JSON.pretty_generate(plan)
