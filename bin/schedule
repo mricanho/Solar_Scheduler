@@ -2,7 +2,7 @@
 # Example CLI entry point for Solar Scheduler
 
 require_relative '../lib/scheduler'
-include SolarScheduler   # facilita acceso a structs y DAYS
+include SolarScheduler
 
 # -demo data --------------------------
 employees = [

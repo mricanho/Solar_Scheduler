@@ -7,7 +7,7 @@ module SolarScheduler
 
     # pool  :: [Employee]
     # need  :: { role => n, :any => m }
-    # Devuelve [Employee] o nil si no se puede formar el equipo.
+    # Returns [Employee] or nil if the team cannot be formed.
     def pick(pool, need)
       team = []
 
