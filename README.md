@@ -1,8 +1,8 @@
 
 
-# Solar Scheduler – Take‑Home Challenge
+# Solar Scheduler
 
-Small Ruby solution that generates a one‑week (Monday → Friday) installation schedule for solar‑panel crews, respecting:
+Small Ruby solution that generates a one‑week (Monday-Friday) installation schedule for solar‑panel crews, respecting:
 
 * **Crew role requirements** per building type  
   | Building type | Certified | Pending | Laborer | Any role |
