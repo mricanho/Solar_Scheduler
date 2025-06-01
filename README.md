@@ -14,7 +14,7 @@ Small Ruby solution that generates a one‑week (Monday-Friday) installation sch
 * **Building priority** – buildings are scheduled in the order they arrive.
 * **Workweek window** – only Monday–Friday are considered; unassigned days still appear in the output.
 
-The algorithm is kept intentionally simple (greedy + helper) to satisfy the prompt’s MVP scope and run in O(B × E).
+The algorithm is kept intentionally simple (greedy + helper) to satisfy the MVP scope and run in O(B × E).
 
 ---
 
