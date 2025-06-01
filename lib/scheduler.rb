@@ -2,7 +2,8 @@
 
 require_relative 'team_picker'
 
-module SolarScheduler # rubocop:disable Style/Documentation
+module SolarScheduler
+  # Weekdays considered for planning
   DAYS = %w[Monday Tuesday Wednesday Thursday Friday].freeze
 
   Employee = Struct.new(:id, :role, :availability) do
@@ -13,7 +14,7 @@ module SolarScheduler # rubocop:disable Style/Documentation
 
   Building = Struct.new(:id, :kind)
 
-  # Reglas del PDF: número de personas requeridas por tipo de edificio.
+  # Crew requirements per building type
   REQUIREMENTS = {
     single: {
       certified: 1,
@@ -25,21 +26,21 @@ module SolarScheduler # rubocop:disable Style/Documentation
       certified: 1,
       pending: 0,
       laborer: 0,
-      any: 1   # 1 extra de cualquier rol
+      any: 1   # 1 extra of any role
     },
     commercial: {
       certified: 2,
       pending: 2,
       laborer: 0,
-      any: 4   # 4 adicionales de cualquier rol
+      any: 4   # 4 additional of any role
     }
   }.freeze
 
   module_function
 
-  # buildings :: [Building]  (ya ordenados por prioridad)
-  # employees :: [Employee]  (con disponibilidad por día)
-  # Devuelve  :: { "Monday" => [ { building:, crew: [ids] }, ... ], ... }
+  # buildings :: [Building]  (already ordered by priority)
+  # employees :: [Employee]  (with daily availability)
+  # Returns  :: { "Monday" => [ { building:, crew: [ids] }, ... ], ... }
   def schedule(buildings, employees)
     backlog = buildings.dup
     availability = employees.each_with_object({}) { |e, h| h[e.id] = e.availability.dup }
@@ -54,7 +55,7 @@ module SolarScheduler # rubocop:disable Style/Documentation
 
         needed = REQUIREMENTS[backlog.first.kind]
         crew   = TeamPicker.pick(day_pool, needed)
-        break unless crew # no hay recursos para más
+        break unless crew # not enough resources for another building
 
         output[day] << { building: backlog.first.id, crew: crew.map(&:id) }
 
